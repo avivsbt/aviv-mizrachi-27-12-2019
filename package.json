@@ -47,7 +47,7 @@
     "typescript": "~3.5.3"
   },
   "scripts":{
-    "postinstall": "ng build --aot -prod"
+    "heroku-postbuild": "ng build --prod"
   }
   
 }
