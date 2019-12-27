@@ -1,0 +1,12 @@
+.container-center {
+    width: 50%;
+    max-width: 650px;
+    margin: 20px auto;
+    /*overflow-y: scroll;
+    height: calc(100vh - 90px);*/
+}
+@media only screen and (max-width : 768px) {
+    .container-center {
+        width: 80%;
+    }
+}
