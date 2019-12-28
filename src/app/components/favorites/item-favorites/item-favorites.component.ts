@@ -18,5 +18,4 @@ export class ItemFavoritesComponent implements OnInit {
     ngOnInit() {
 
     }
-
 }

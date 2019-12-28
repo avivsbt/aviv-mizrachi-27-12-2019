@@ -5,7 +5,8 @@ import { SpinnerService } from './spinner/spinner.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { FavoriteDirective } from './favorite/favorite.directive';
-import { HeaderComponent } from './header/header.component';
+import { IconComponent } from './icon/icon.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
     imports: [
@@ -16,16 +17,18 @@ import { HeaderComponent } from './header/header.component';
         FontAwesomeModule,
         SpinnerComponent,
         FavoriteDirective,
-        FavoriteComponent
+        FavoriteComponent,
+        IconComponent,
+        AlertComponent
     ],
     declarations: [
         SpinnerComponent,
         FavoriteComponent,
         FavoriteDirective,
+        IconComponent,
+        AlertComponent
     ],
-    providers: [
-        SpinnerService
-    ],
+    providers: [],
     entryComponents: []
 })
 export class CoreModule {

@@ -9,18 +9,12 @@
         </div>
     </div>
     <div class="col">
-        <div class="weatherIcon weatherIcon-small">
-            <div class="mostlycloudy">
-                <div class="inner"></div>
-            </div>
-        </div>
+        <app-icon [small]='true'></app-icon>
     </div>
     <div class="col">
         <div class="item-center">
             <div>
-                <button>
-                    <fa-icon class="fa" [icon]="faMinus"></fa-icon>
-                </button>
+                <favorite [id]='5' [type]="'city'"></favorite>
             </div>
         </div>
     </div>

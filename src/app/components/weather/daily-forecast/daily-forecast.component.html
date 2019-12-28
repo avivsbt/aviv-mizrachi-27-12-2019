@@ -1,78 +1,12 @@
 <div class="row">
-
-    <div class="item-day col">
+    <div class="item-day col" *ngFor="let item of [0,1,2,3,4]">
         <div class="item-center">
             <div>
                 <h3 class="day">Tue</h3>
-                <div class="weatherIcon weatherIcon-small">
-                    <div class="chancerain">
-                        <div class="inner"></div>
-                    </div>
-                </div>
+                <app-icon [small]='true'></app-icon>
                 <p class="conditions">Mostly Cloudy</p>
                 <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
             </div>
         </div>
     </div>
-
-    <div class="item-day col">
-        <div class="item-center">
-            <div>
-                <h3 class="day">Tue</h3>
-                <div class="weatherIcon weatherIcon-small">
-                    <div class="cloudy">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <p class="conditions">Mostly Cloudy</p>
-                <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="item-day col">
-        <div class="item-center">
-            <div>
-                <h3 class="day">Tue</h3>
-                <div class="weatherIcon weatherIcon-small">
-                    <div class="sunny">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <p class="conditions">Mostly Cloudy</p>
-                <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="item-day col">
-        <div class="item-center">
-            <div>
-                <h3 class="day">Tue</h3>
-                <div class="weatherIcon weatherIcon-small">
-                    <div class="chanceflurries">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <p class="conditions">Mostly Cloudy</p>
-                <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="item-day col">
-        <div class="item-center">
-            <div>
-                <h3 class="day">Tue</h3>
-                <div class="weatherIcon weatherIcon-small">
-                    <div class="chancesnow">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <p class="conditions">Mostly Cloudy</p>
-                <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
-            </div>
-        </div>
-    </div>
-
 </div>

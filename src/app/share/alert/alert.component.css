@@ -1,0 +1,33 @@
+.alert {
+    color: rgba(0,0,0,0.5);
+    width: 100%;
+    z-index: 100;
+    transition: all .5s ease-in-out;
+    height: 35px;
+    position: relative;   
+}
+.alert p {
+    padding: 10px 40px 6px;   
+    margin: 0;
+}
+.alert-success{
+    background-color: rgb(82, 179, 58);
+}
+.alert-danger {
+    background-color: rgb(226, 85, 85);
+}
+.alert-info {
+    background-color: #ccc;
+}
+.alert-warning{
+    background-color: rgb(231, 175, 69);
+}
+.close{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+.alert-animation{
+  height: 0;
+  overflow: hidden;
+}

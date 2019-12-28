@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { StorageEntity } from '../../models/storage-entity.model'
+import { StorageEntity } from '../models/storage-entity.model'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 
 export class StorageService {
 
@@ -39,7 +39,7 @@ export class StorageService {
     }
 
     clearStorage() {
-        this.remove('albums');
+        this.remove('favorite');
     }
     
 }

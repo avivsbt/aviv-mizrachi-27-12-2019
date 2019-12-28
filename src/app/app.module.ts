@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
+import { CoreModule } from './share/core.module';
 import { WeatherModule } from './components/weather/weather.module';
-import { FavoritesModule } from './components/favorites/favorites.module';
-import { HeaderComponent } from './core/header/header.component';
+import { HeaderComponent } from './share/header/header.component';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
   declarations: [
@@ -15,9 +15,12 @@ import { HeaderComponent } from './core/header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
-    WeatherModule,
-    //FavoritesModule
+    CoreModule.forRoot(),
+    LocalStorageModule.forRoot({
+      prefix: 'app',
+      storageType: 'localStorage'
+    }),
+    WeatherModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,4 @@
+<div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+    <p>{{alert.message}}</p>
+    <a class="close pointer" (click)="removeAlert(alert)">&times;</a>
+</div>

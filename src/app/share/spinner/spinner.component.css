@@ -1,0 +1,16 @@
+.spinner{
+  background-color: #FFECAE;
+  color: rgba(0,0,0,0.5);
+  width: 100%;
+  z-index: 100;
+  transition: all .5s ease-in-out;
+  height: 35px;                   
+}
+.spinner p{
+  padding: 10px 40px 6px;   
+  margin: 0;
+}
+.spinner-animation{
+  height: 0;
+  overflow: hidden;
+}
