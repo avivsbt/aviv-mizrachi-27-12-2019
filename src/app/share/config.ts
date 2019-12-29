@@ -1,7 +1,7 @@
 import { environment } from '../../environments/environment';
 
 function getBaseUrl(): string {
-    return environment.production ? 'http://dataservice.accuweather.com' : `${window.location.origin}` + '/assets/data/'; 
+    return 'http://dataservice.accuweather.com';
 }
 
 export const CONFIG = {
@@ -13,13 +13,13 @@ export const CONFIG = {
         return this.baseUrl + url;
     },
     endpoints: {
-        search: '/locations/v1/cities/geoposition/search',     
+        geoposition: '/locations/v1/cities/geoposition/search',     
         autocomplete: '/locations/v1/cities/autocomplete',     
         currentConditions: `/currentconditions/v1/`,     
         forecasts: '/forecasts/v1/daily/5day',     
     },
-    external: { 
-
-    },
+    APIKey:{
+        Weather: 'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT'
+    }
 };
 

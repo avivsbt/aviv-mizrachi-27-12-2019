@@ -6,6 +6,7 @@ import { CoreModule } from './share/core.module';
 import { WeatherModule } from './components/weather/weather.module';
 import { HeaderComponent } from './share/header/header.component';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LocalStorageModule } from 'angular-2-local-storage';
       prefix: 'app',
       storageType: 'localStorage'
     }),
+    HttpClientModule,
     WeatherModule
   ],
   providers: [],
