@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from './services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   constructor(
-    
+    private settingService: SettingService
   ) {
 
-   }
+  }
 
-   ngOnInit() {
-    
+  ngOnInit() {
+    this.settingService.locationState.subscribe(loc => {
+      console.log(loc)
+    });
   }
 
 }

@@ -1,4 +1,4 @@
-import { environment } from '../../environments/environment';
+import { Location } from '../models/location.model';
 
 function getBaseUrl(): string {
     return 'http://dataservice.accuweather.com';
@@ -20,6 +20,8 @@ export const CONFIG = {
     },
     APIKey:{
         Weather: 'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT'
-    }
+    },
+    defaultLocation: new Location(78.601944, -104.185556),
 };
+
 

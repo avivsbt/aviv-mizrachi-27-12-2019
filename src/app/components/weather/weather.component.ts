@@ -15,7 +15,7 @@ export class WeatherComponent implements OnInit {
   constructor(
     private spinnerService: SpinnerService,
     private alertService: AlertService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
   ) { }
 
   ngOnInit() {
@@ -45,6 +45,8 @@ export class WeatherComponent implements OnInit {
     /*this.weatherService.forecasts('2325057').subscribe(res => {
       console.log(res);
     });*/  
+
+  
 
   }
 
