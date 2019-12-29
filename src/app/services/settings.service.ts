@@ -13,7 +13,7 @@ export class SettingService {
     locationSubject = new Subject<Location>();
     locationState = this.locationSubject.asObservable();    
 
-    private UnitCelsius: boolean = false;
+    private UnitCelsius: boolean = this.storageService.get<boolean>('UnitCelsius');
     unitCelsiuSubject = new Subject<boolean>();
     unitCelsiusState = this.unitCelsiuSubject.asObservable();   
 
@@ -36,8 +36,15 @@ export class SettingService {
 
     setUnitTemperature(){
         if(!this.storageService.get<boolean>('UnitCelsius')){
+            this.UnitCelsius = false;
             this.storageService.set('UnitCelsius', this.UnitCelsius, Moment().add(30, 'days').toDate());
         }
+        this.unitCelsiuSubject.next(this.UnitCelsius);
+    }
+
+    changeUnitTemperature(){
+        this.UnitCelsius = !this.UnitCelsius;
+        this.storageService.set('UnitCelsius', this.UnitCelsius, Moment().add(30, 'days').toDate());
         this.unitCelsiuSubject.next(this.UnitCelsius);
     }
 

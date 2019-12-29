@@ -19,8 +19,12 @@ export class SideButtonsComponent implements OnInit {
 
   }
 
-  location(){
+  toggleLocation(){
     this.settingService.setLocation();
+  }
+
+  toggleUnit(){
+    this.settingService.changeUnitTemperature();
   }
 
 }

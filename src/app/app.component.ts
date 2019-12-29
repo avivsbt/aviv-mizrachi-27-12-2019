@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   private locationSubscription: Subscription;
+  private unitSubscription: Subscription;
 
   constructor(
     private settingService: SettingService
@@ -22,10 +23,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.locationSubscription = this.settingService.locationState.subscribe(loc => {
       console.log(loc)
     });
+    this.unitSubscription = this.settingService.unitCelsiusState.subscribe(unit => {
+      console.log(unit)
+    });    
   }
 
   ngOnDestroy() {
     this.locationSubscription.unsubscribe();
+    this.unitSubscription.unsubscribe();
   }
 
 }

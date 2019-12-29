@@ -2,8 +2,8 @@
     <div>
         <favorite [id]='5' [type]="'city'"></favorite>
 
-        <button class="unit">F</button>
+        <button class="unit" (click)="toggleUnit()">F</button>
 
-        <button (click)="location()"><fa-icon class="fa" [icon]="faLocationArrow"></fa-icon></button>
+        <button (click)="toggleLocation()"><fa-icon class="fa" [icon]="faLocationArrow"></fa-icon></button>
     </div>
 </div>
