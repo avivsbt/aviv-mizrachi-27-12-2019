@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SettingService } from './services/settings.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,9 @@ import { SettingService } from './services/settings.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+
+  private locationSubscription: Subscription;
 
   constructor(
     private settingService: SettingService
@@ -16,9 +19,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.settingService.locationState.subscribe(loc => {
+    this.locationSubscription = this.settingService.locationState.subscribe(loc => {
       console.log(loc)
     });
+  }
+
+  ngOnDestroy() {
+    this.locationSubscription.unsubscribe();
   }
 
 }

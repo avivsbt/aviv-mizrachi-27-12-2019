@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Location } from '../models/location.model';
 import { CONFIG } from '../share/config';
 import { Subject } from 'rxjs';
+import * as Moment from 'moment';
+import { StorageService } from '../services/local-storage.service';
 
 @Injectable({ providedIn: 'root' })
 
@@ -11,8 +13,15 @@ export class SettingService {
     locationSubject = new Subject<Location>();
     locationState = this.locationSubject.asObservable();    
 
-    constructor() {
-        console.log('SettingService')
+    private UnitCelsius: boolean = false;
+    unitCelsiuSubject = new Subject<boolean>();
+    unitCelsiusState = this.unitCelsiuSubject.asObservable();   
+
+    constructor(
+        private storageService: StorageService
+    ) {
+        this.setLocation();
+        this.setUnitTemperature();
     }
 
     setLocation() {
@@ -21,7 +30,15 @@ export class SettingService {
             this.locationSubject.next(this.crrLocation);
         }, () => {
             this.crrLocation = CONFIG.defaultLocation;
+            this.locationSubject.next(this.crrLocation);
         });
+    }
+
+    setUnitTemperature(){
+        if(!this.storageService.get<boolean>('UnitCelsius')){
+            this.storageService.set('UnitCelsius', this.UnitCelsius, Moment().add(30, 'days').toDate());
+        }
+        this.unitCelsiuSubject.next(this.UnitCelsius);
     }
 
 
