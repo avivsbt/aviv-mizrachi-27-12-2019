@@ -8,22 +8,22 @@ import { SettingService } from 'src/app/services/settings.service';
   styleUrls: ['./side-buttons.component.css']
 })
 export class SideButtonsComponent implements OnInit {
-  
+
   public faLocationArrow = faLocationArrow;
 
   constructor(
-    private settingService: SettingService
+    public settingService: SettingService
   ) { }
 
   ngOnInit() {
 
   }
 
-  toggleLocation(){
+  toggleLocation() {
     this.settingService.setLocation();
   }
 
-  toggleUnit(){
+  toggleUnit() {
     this.settingService.changeUnitTemperature();
   }
 

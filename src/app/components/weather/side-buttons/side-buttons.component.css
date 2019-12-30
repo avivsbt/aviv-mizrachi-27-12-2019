@@ -27,6 +27,9 @@
     content: '\00b0';
     padding: 1px;
 }
+.cover-buttons .active{
+    background: rgba(255, 255, 255, 0.25);
+}
 @media only screen and (max-width : 768px ), screen and (max-height: 768px)  {
     .cover-buttons {
         left: 5px;

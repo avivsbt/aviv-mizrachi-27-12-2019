@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="item-day col" *ngFor="let item of [0,1,2,3,4]">
+    <div class="item-day col" *ngFor="let item of forecast">
         <div class="item-center">
             <div>
-                <h3 class="day">Tue</h3>
-                <app-icon [small]='true'></app-icon>
-                <p class="conditions">Mostly Cloudy</p>
-                <p class="tempRange"><span class="high">57</span> | <span class="low">45</span></p>
+                <h3 class="day">{{item.Date | date:'E'}}</h3>
+                <app-icon [small]='true' [type]='item.Day.Icon'></app-icon>
+                <p class="conditions">{{item.Day.IconPhrase}}</p>
+                <p class="tempRange"><span class="high">{{item.Temperature.Maximum.Value}}</span> | <span class="low">{{item.Temperature.Minimum.Value}}</span></p>
             </div>
         </div>
     </div>

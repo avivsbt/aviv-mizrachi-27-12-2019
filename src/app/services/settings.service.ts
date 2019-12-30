@@ -5,23 +5,29 @@ import { Subject } from 'rxjs';
 import * as Moment from 'moment';
 import { StorageService } from '../services/local-storage.service';
 
+import { map } from 'rxjs/operators'
+
 @Injectable({ providedIn: 'root' })
 
 export class SettingService {
 
-    private crrLocation: Location;
-    locationSubject = new Subject<Location>();
-    locationState = this.locationSubject.asObservable();    
+    public crrLocation: Location;
+    private readonly locationSubject = new Subject<Location>();
+    readonly locationState = this.locationSubject.asObservable();
 
     private UnitCelsius: boolean = this.storageService.get<boolean>('UnitCelsius');
-    unitCelsiuSubject = new Subject<boolean>();
-    unitCelsiusState = this.unitCelsiuSubject.asObservable();   
+    private readonly unitCelsiuSubject = new Subject<boolean>();
+    readonly unitCelsiuState = this.unitCelsiuSubject.asObservable();
+    readonly isCelsius = this.unitCelsiuState.pipe(
+        map(res  =>{ 
+             return res;
+        })
+    )
 
     constructor(
         private storageService: StorageService
     ) {
-        this.setLocation();
-        this.setUnitTemperature();
+        this.setLocation(); 
     }
 
     setLocation() {
@@ -34,15 +40,16 @@ export class SettingService {
         });
     }
 
-    setUnitTemperature(){
-        if(!this.storageService.get<boolean>('UnitCelsius')){
-            this.UnitCelsius = false;
-            this.storageService.set('UnitCelsius', this.UnitCelsius, Moment().add(30, 'days').toDate());
+    setUnitTemperature() {
+        if (this.UnitCelsius == undefined) {
+            this.storageService.set('UnitCelsius', !!this.UnitCelsius, Moment().add(30, 'days').toDate());
         }
-        this.unitCelsiuSubject.next(this.UnitCelsius);
+        setTimeout(()=>{
+            this.unitCelsiuSubject.next(this.UnitCelsius);
+        },0)
     }
 
-    changeUnitTemperature(){
+    changeUnitTemperature() {
         this.UnitCelsius = !this.UnitCelsius;
         this.storageService.set('UnitCelsius', this.UnitCelsius, Moment().add(30, 'days').toDate());
         this.unitCelsiuSubject.next(this.UnitCelsius);

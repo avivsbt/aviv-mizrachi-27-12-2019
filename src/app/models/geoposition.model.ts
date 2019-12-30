@@ -1,4 +1,4 @@
-import { MetricAndImperial } from './weather.model';
+import { MetricAndImperial } from '../models/currentConditions.model';
 
 export interface Geoposition {
     Version: number,
@@ -36,7 +36,7 @@ export interface TimeZone {
     Name: string;
     GmtOffset: number;
     IsDaylightSaving: boolean;
-    NextOffsetChange: Date;
+    NextOffsetChange: string;
 }
 export interface GeoPosition {
     Latitude: number;

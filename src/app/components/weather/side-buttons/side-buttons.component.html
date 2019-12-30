@@ -2,8 +2,9 @@
     <div>
         <favorite [id]='5' [type]="'city'"></favorite>
 
-        <button class="unit" (click)="toggleUnit()">F</button>
+        <button class="unit" (click)="toggleUnit()" [ngClass]="{'active': settingService.isCelsius | async}">F</button>
 
         <button (click)="toggleLocation()"><fa-icon class="fa" [icon]="faLocationArrow"></fa-icon></button>
     </div>
 </div>
+

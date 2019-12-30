@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-favorites',
@@ -9,11 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class FavoritesComponent implements OnInit {
 
   constructor(
-    
+    public settingService: SettingService
   ) { }
 
   ngOnInit() {
-
+    this.settingService.setUnitTemperature();
   }
 
 }

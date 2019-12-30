@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Forecasts } from 'src/app/models/forecasts.model';
 
 @Component({
   selector: 'app-daily-forecast',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./daily-forecast.component.css']
 })
 export class DailyForecastComponent implements OnInit {
+
+  @Input() forecast: Forecasts;
 
   constructor(
     

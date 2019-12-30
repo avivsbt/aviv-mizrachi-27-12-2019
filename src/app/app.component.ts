@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { SettingService } from './services/settings.service';
 import { Subscription } from 'rxjs';
+import { WeatherStoreService } from './services/weather-store.service';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +9,35 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private locationSubscription: Subscription;
-  private unitSubscription: Subscription;
+  //private unitSubscription: Subscription;
 
   constructor(
-    private settingService: SettingService
+    public settingService: SettingService,
+    private weatherStoreService: WeatherStoreService
   ) {
-
   }
 
-  ngOnInit() {
-    this.locationSubscription = this.settingService.locationState.subscribe(loc => {
-      console.log(loc)
+  ngOnInit(): void {
+    this.locationSubscription = this.settingService.locationState.subscribe(location => {
+      this.weatherStoreService.fetchByLocation(location);
     });
-    this.unitSubscription = this.settingService.unitCelsiusState.subscribe(unit => {
+    /*this.unitSubscription = this.settingService.unitCelsiuState.subscribe(unit => {
       console.log(unit)
-    });    
+    });*/
+    //setTimeout(()=>{},1500)
+    
   }
 
-  ngOnDestroy() {
+  ngAfterViewInit(): void {
+    
+  }
+
+  ngOnDestroy(): void {
     this.locationSubscription.unsubscribe();
-    this.unitSubscription.unsubscribe();
+    //this.unitSubscription.unsubscribe();
   }
 
 }

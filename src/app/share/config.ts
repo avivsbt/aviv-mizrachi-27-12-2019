@@ -21,7 +21,7 @@ export const CONFIG = {
     APIKey:{
         Weather: 'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT'
     },
-    defaultLocation: new Location(78.601944, -104.185556),
+    defaultLocation: new Location(32.106086399999995, 34.829107199999996),
 };
 
 
