@@ -1,7 +1,7 @@
 import { Location } from '../models/location.model';
 
 function getBaseUrl(): string {
-    return 'http://dataservice.accuweather.com';
+    return 'https://dataservice.accuweather.com';
 }
 
 export const CONFIG = {
