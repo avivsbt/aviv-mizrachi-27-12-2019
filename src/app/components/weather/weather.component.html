@@ -1,5 +1,5 @@
 <div class="cover-search">
-    <input type="text" placeholder="Search" (keyup)="onKey($event)" #search>
+    <input type="text" placeholder="Search" (keyup)="search()" #searchInput>
     <fa-icon class="fa faTimes pointer" [icon]="faTimes" (click)="clearSearch()"></fa-icon>
     <div class="result-search pointer">
         <div *ngFor="let item of resultSearch" (click)="selectCurrentWeather(item.Key, item.LocalizedName, item.Country.ID)">

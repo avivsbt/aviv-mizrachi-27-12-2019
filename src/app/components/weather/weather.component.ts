@@ -21,7 +21,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   private isCelsiusSubscription: Subscription;
   public isCelsius: boolean;
 
-  @ViewChild('search', { static: false }) search: ElementRef;
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   public faTimes = faTimes;
   public resultSearch: Autocomplete[];
 
@@ -47,17 +47,17 @@ export class WeatherComponent implements OnInit, OnDestroy {
     this.isCelsiusSubscription.unsubscribe();
   }
 
-  onKey(): void {
-    if (this.search.nativeElement.value.length >= 3) {
-      this.weatherService.autocomplete(this.search.nativeElement.value).subscribe(res => {
+  search(): void {
+    if (this.searchInput.nativeElement.value.length >= 3) {
+      this.weatherService.autocomplete(this.searchInput.nativeElement.value).subscribe(res => {
         this.resultSearch = res;
-      })
+      });
     }
   }
 
   clearSearch(): void {
     this.resultSearch = [];
-    this.search.nativeElement.value = '';
+    this.searchInput.nativeElement.value = '';
   }
 
   selectCurrentWeather(key: string, LocalizedName: string, Country: string) {
