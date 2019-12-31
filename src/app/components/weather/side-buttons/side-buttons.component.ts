@@ -1,30 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import { SettingService } from 'src/app/services/settings.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-side-buttons',
   templateUrl: './side-buttons.component.html',
   styleUrls: ['./side-buttons.component.css']
 })
-export class SideButtonsComponent implements OnInit {
+export class SideButtonsComponent implements OnInit, OnDestroy {
 
   public faLocationArrow = faLocationArrow;
+  private isCelsiusSubscription: Subscription;
+  public isCelsius: boolean;
 
   constructor(
     public settingService: SettingService
   ) { }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
+    this.isCelsiusSubscription = this.settingService.unitCelsiuState.subscribe(res => {
+      this.isCelsius = res;
+    });
   }
 
-  toggleLocation() {
+  toggleLocation(): void {
     this.settingService.setLocation();
   }
 
-  toggleUnit() {
+  toggleUnit(): void {
     this.settingService.changeUnitTemperature();
+  }
+
+  ngOnDestroy(): void {
+    this.isCelsiusSubscription.unsubscribe();
   }
 
 }

@@ -25,6 +25,8 @@ export class IconComponent implements OnInit {
             case 3:
             case 4:
             case 30:
+            case 33:
+            case 35:
                 return 'clear';
             case 5:
                 return 'mostlysunny';

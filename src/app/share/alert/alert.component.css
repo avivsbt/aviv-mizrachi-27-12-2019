@@ -3,7 +3,8 @@
     width: 100%;
     z-index: 100;
     transition: all .5s ease-in-out;
-    height: 35px;
+    min-height: 35px;
+    overflow: hidden;
     position: relative;   
 }
 .alert p {

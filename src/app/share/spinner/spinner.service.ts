@@ -9,9 +9,7 @@ export class SpinnerService {
   private spinnerSubject = new Subject<SpinnerState>();
   spinnerState = this.spinnerSubject.asObservable();
 
-  constructor() { //@Optional() @SkipSelf() prior: SpinnerService
-    //if (prior) { return prior; }
-  }
+  constructor() { }
 
   show() {
     this.spinnerSubject.next(<SpinnerState>{ show: true });

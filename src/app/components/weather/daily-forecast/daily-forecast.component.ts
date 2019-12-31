@@ -11,10 +11,10 @@ export class DailyForecastComponent implements OnInit {
   @Input() forecast: Forecasts;
 
   constructor(
-    
+
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 

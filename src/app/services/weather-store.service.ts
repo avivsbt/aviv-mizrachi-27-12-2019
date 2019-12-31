@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { WeatherService } from './weather.service';
 import { BehaviorSubject } from 'rxjs';
-import { SettingService } from './settings.service';
 import { Location } from '../models/location.model';
 import { Weather } from '../models/weather.model';
-import { CurrentConditions } from '../models/currentConditions.model';
-import { Geoposition } from '../models/geoposition.model';
-
 import { map } from 'rxjs/operators'
 
 @Injectable({ providedIn: 'root' })
@@ -14,10 +10,10 @@ import { map } from 'rxjs/operators'
 export class WeatherStoreService {
 
     private currentWeatherKey: string;
+    private weatherKeys: string[];
 
     constructor(
-        private weatherService: WeatherService,
-        private settingService: SettingService
+        private weatherService: WeatherService
     ) {
 
     }
@@ -39,22 +35,30 @@ export class WeatherStoreService {
 
     async fetchByLocation(location: Location) {
         const geoposition = await this.weatherService.geoposition(location.latitude, location.longitude).toPromise();
-        const currentConditions = await this.weatherService.currentConditions(geoposition.Key).toPromise();
-        const forecasts = await this.weatherService.forecasts(geoposition.Key).toPromise();
-        const current =  new Weather(geoposition.Key, currentConditions[0], forecasts, geoposition);
+        this.fetchByKey(geoposition.Key, geoposition.LocalizedName, geoposition.Country.ID);
+    }
 
-        if(!this.currentWeatherKey){
-            this.currentWeatherKey = geoposition.Key;
-        }
+    async fetchByKey(key: string, LocalizedName: string, Country: string) {
+       //!this.weatherKeys.includes(key)) 
+       //this.weatherKeys = [...this.weatherKeys, key];
+        const currentConditions = await this.weatherService.currentConditions(key).toPromise();
+        const forecasts = await this.weatherService.forecasts(key).toPromise();
+        const current = new Weather(
+            key,
+            LocalizedName,
+            Country,
+            currentConditions[0].LocalObservationDateTime,
+            currentConditions[0].Temperature,
+            currentConditions[0].WeatherIcon,
+            currentConditions[0].WeatherText,
+            forecasts.DailyForecasts
+        );
+        this.currentWeatherKey = key;
         this.weathers = [...this.weathers, current];
     }
 
-    async fetchByKey(key: string) {
-        /*const currentConditions = await this.weatherService.currentConditions(key).toPromise();
-        const forecasts = await this.weatherService.forecasts(key).toPromise();
-        const current =  new Weather(key, currentConditions[0], forecasts);
-        this.weathers = [...this.weathers, current];
-        console.log(this.weathers);*/
+    selectCurrentWeather() {
+
     }
 
 }

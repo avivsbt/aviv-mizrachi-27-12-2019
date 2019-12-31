@@ -20,7 +20,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         private alertService: AlertService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.subscription = this.alertService.onAlert(this.id).subscribe(alert => {
             if (!alert.message) {
                 this.alerts = [];
@@ -30,15 +30,15 @@ export class AlertComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 
-    removeAlert(alert: Alert) {
+    removeAlert(alert: Alert): void {
         this.alerts = this.alerts.filter(x => x !== alert);
     }
 
-    cssClass(alert: Alert) {
+    cssClass(alert: Alert): string {
         if (!alert) {
             return;
         }

@@ -13,8 +13,8 @@ export class FavoritesComponent implements OnInit {
     public settingService: SettingService
   ) { }
 
-  ngOnInit() {
-    this.settingService.setUnitTemperature();
+  ngOnInit(): void {
+
   }
 
 }

@@ -1,19 +1,32 @@
-import { Geoposition } from './geoposition.model';
-import { CurrentConditions } from '../models/currentConditions.model';
+import { Temperature } from '../models/currentConditions.model';
 import { Forecasts } from './forecasts.model';
 
-
 export class Weather {
-    Key:string
-    Geoposition: Geoposition;
-    CurrentConditions: CurrentConditions;
-    Forecasts: Forecasts;
+    Key: string;
+    Name: string;
+    Country: string;
+    DateTime: string;
+    Temperature: Temperature;
+    WeatherIcon: number;
+    WeatherText: string;
+    DailyForecasts: Forecasts["DailyForecasts"]
 
-    constructor(Key:string, CurrentConditions: CurrentConditions, Forecasts: Forecasts, Geoposition?: Geoposition)  {
+    constructor(
+        Key: string,
+        Name: string,
+        Country: string,
+        DateTime: string,
+        Temperature: Temperature,
+        WeatherIcon: number,
+        WeatherText: string,
+        DailyForecasts: Forecasts["DailyForecasts"]) {
         this.Key = Key;
-        this.Geoposition = Geoposition;
-        this.CurrentConditions = CurrentConditions;
-        this.Forecasts = Forecasts;
+        this.Name = Name;
+        this.Country = Country;
+        this.DateTime = DateTime;
+        this.Temperature = Temperature;
+        this.WeatherIcon = WeatherIcon;
+        this.WeatherText = WeatherText;
+        this.DailyForecasts = DailyForecasts;
     }
-
 }

@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { SpinnerService } from 'src/app/share/spinner/spinner.service';
-import { AlertService } from 'src/app/share/alert/alert.service';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import { SettingService } from 'src/app/services/settings.service';
 import { WeatherStoreService } from 'src/app/services/weather-store.service';
 import { Subscription } from 'rxjs';
 import { Weather } from '../../models/weather.model';
+import { Autocomplete } from '../../models/autocomplete.model';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-weather',
@@ -19,44 +18,51 @@ export class WeatherComponent implements OnInit, OnDestroy {
   private currentWeatherSubscription: Subscription;
   public currentWeather: Weather;
 
+  private isCelsiusSubscription: Subscription;
+  public isCelsius: boolean;
+
+  @ViewChild('search', { static: false }) search: ElementRef;
+  public faTimes = faTimes;
+  public resultSearch: Autocomplete[];
+
   constructor(
-    private spinnerService: SpinnerService,
-    private alertService: AlertService,
     private weatherService: WeatherService,
     public settingService: SettingService,
     private weatherStoreService: WeatherStoreService
   ) { }
 
-  ngOnInit(): void{
-    
-    this.settingService.setUnitTemperature();
-
+  ngOnInit(): void {
     this.currentWeatherSubscription = this.weatherStoreService.currentWeather$.subscribe(res => {
       this.currentWeather = res;
       console.log(res);
     });
 
-    /*this.spinnerService.show();
-    this.alertService.success('Success!!');
-    this.alertService.error('Error!!');
-    this.alertService.info('info!!');
-    this.alertService.warn('warn!!');
-
-    setTimeout(() =>{
-      this.spinnerService.hide();
-      this.alertService.clear();
-    },2000);*/
-
+    this.isCelsiusSubscription = this.settingService.unitCelsiuState.subscribe(res => {
+      this.isCelsius = res;
+    });
   }
 
   ngOnDestroy(): void {
     this.currentWeatherSubscription.unsubscribe();
+    this.isCelsiusSubscription.unsubscribe();
   }
 
-  onKey(e) {
-    if (e.target.value.length >= 3) {
-      console.log(e.target.value);
+  onKey(): void {
+    if (this.search.nativeElement.value.length >= 3) {
+      this.weatherService.autocomplete(this.search.nativeElement.value).subscribe(res => {
+        this.resultSearch = res;
+      })
     }
+  }
+
+  clearSearch(): void {
+    this.resultSearch = [];
+    this.search.nativeElement.value = '';
+  }
+
+  selectCurrentWeather(key: string, LocalizedName: string, Country: string) {
+    this.clearSearch();
+    this.weatherStoreService.fetchByKey(key, LocalizedName, Country);
   }
 
 }

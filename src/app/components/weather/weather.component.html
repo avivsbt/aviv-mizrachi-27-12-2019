@@ -1,17 +1,25 @@
 <div class="cover-search">
-    <input type="search" placeholder="Search" (keyup)="onKey($event)">
+    <input type="text" placeholder="Search" (keyup)="onKey($event)" #search>
+    <fa-icon class="fa faTimes pointer" [icon]="faTimes" (click)="clearSearch()"></fa-icon>
+    <div class="result-search pointer">
+        <div *ngFor="let item of resultSearch" (click)="selectCurrentWeather(item.Key, item.LocalizedName, item.Country.ID)">
+            {{item.LocalizedName}}
+        </div>
+    </div>
 </div>
 
-<div class="container-center" >
+<div class="container-center">
     <div class="item-center">
         <div>
-            <h1 class="location">{{currentWeather?.Geoposition.LocalizedName}}</h1>
-            <h2 class="date">{{currentWeather?.CurrentConditions.LocalObservationDateTime | date}}</h2>
-            <app-icon [type]='currentWeather?.Forecasts.DailyForecasts[0].Day.Icon'></app-icon>
-            <p class="temp">{{currentWeather?.CurrentConditions.Temperature.Imperial.Value}}</p>
-            <p class="conditions">{{currentWeather?.CurrentConditions.WeatherText}}</p>
+            <h1 class="location">{{currentWeather?.Name}}</h1>
+            <h2 class="date">{{currentWeather?.DateTime | date}}</h2>
+            <app-icon [type]='currentWeather?.WeatherIcon'></app-icon>
+            <p class="temp" [hidden]="isCelsius">{{currentWeather?.Temperature.Metric.Value}}</p>
+            <p class="temp" [hidden]="!isCelsius">{{currentWeather?.Temperature.Imperial.Value}}</p>
+            <p class="conditions">{{currentWeather?.WeatherText}}</p>
         </div>
     </div>
     <app-side-buttons></app-side-buttons>
 </div>
-<app-daily-forecast [forecast]="currentWeather?.Forecasts.DailyForecasts"></app-daily-forecast>
+
+<app-daily-forecast [forecast]="currentWeather?.DailyForecasts"></app-daily-forecast>

@@ -12,7 +12,6 @@ import { SpinnerState } from './spinner.models';
 export class SpinnerComponent implements OnDestroy, OnInit {
 
     public visible = false;
-
     private spinnerStateChanged: Subscription;
 
     constructor(
