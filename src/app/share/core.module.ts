@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FavoriteComponent } from './favorite/favorite.component';
-import { FavoriteDirective } from './favorite/favorite.directive';
 import { IconComponent } from './icon/icon.component';
 import { AlertComponent } from './alert/alert.component';
 
@@ -15,7 +14,6 @@ import { AlertComponent } from './alert/alert.component';
     exports: [
         FontAwesomeModule,
         SpinnerComponent,
-        FavoriteDirective,
         FavoriteComponent,
         IconComponent,
         AlertComponent
@@ -23,7 +21,6 @@ import { AlertComponent } from './alert/alert.component';
     declarations: [
         SpinnerComponent,
         FavoriteComponent,
-        FavoriteDirective,
         IconComponent,
         AlertComponent
     ],

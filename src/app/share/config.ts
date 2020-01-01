@@ -14,12 +14,13 @@ export const CONFIG = {
     },
     endpoints: {
         geoposition: '/locations/v1/cities/geoposition/search',     
+        locationKey: '/locations/v1/',
         autocomplete: '/locations/v1/cities/autocomplete',     
         currentConditions: `/currentconditions/v1/`,     
-        forecasts: '/forecasts/v1/daily/5day',     
+        forecasts: '/forecasts/v1/daily/5day/',     
     },
     APIKey:{
-        Weather: 'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT'
+        Weather: 'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6'  //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' //'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
     },
     defaultLocation: new Location(32.106086399999995, 34.829107199999996),
 };

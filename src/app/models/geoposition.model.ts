@@ -1,4 +1,4 @@
-import { MetricAndImperial } from '../models/currentConditions.model';
+import { MetricAndImperial } from './current-conditions.model';
 
 export interface Geoposition {
     Version: number,

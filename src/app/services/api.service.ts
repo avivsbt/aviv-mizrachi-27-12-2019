@@ -5,14 +5,15 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from "rxjs/operators";
 import { SpinnerService } from '../share/spinner/spinner.service';
 import { AlertService } from '../share/alert/alert.service';
-import { CurrentConditions } from '../models/currentConditions.model';
+import { CurrentConditions } from '../models/current-conditions.model';
 import { Geoposition } from '../models/geoposition.model';
 import { Autocomplete } from '../models/autocomplete.model';
 import { Forecasts } from '../models/forecasts.model';
+import { LocationKey } from '../models/location-key.model';
 
 @Injectable({ providedIn: 'root' })
 
-export class WeatherService {
+export class ApiService {
 
     constructor(
         private httpClient: HttpClient,
@@ -45,6 +46,19 @@ export class WeatherService {
             })
         );
     }
+
+    public locationKey(key: string): Observable<LocationKey> {
+        this.spinnerService.show();
+        return this.httpClient.get<LocationKey>(CONFIG.getUrl(CONFIG.endpoints.locationKey + `${key}?apikey=${CONFIG.APIKey.Weather}`)).pipe(
+            catchError(err => {
+                this.alertService.error(err.message)
+                return throwError(err);
+            }),
+            finalize(() => {
+                this.spinnerService.hide();
+            })
+        );
+    }    
 
     public autocomplete(term: string): Observable<Autocomplete[]> {
         this.spinnerService.show();

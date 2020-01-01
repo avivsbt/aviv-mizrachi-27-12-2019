@@ -2,7 +2,7 @@
     <input type="text" placeholder="Search" (keyup)="search()" #searchInput>
     <fa-icon class="fa faTimes pointer" [icon]="faTimes" (click)="clearSearch()"></fa-icon>
     <div class="result-search pointer">
-        <div *ngFor="let item of resultSearch" (click)="selectCurrentWeather(item.Key, item.LocalizedName, item.Country.ID)">
+        <div *ngFor="let item of resultSearch" (click)="selectSearch(item.Key, item.LocalizedName, item.Country.ID)">
             {{item.LocalizedName}}
         </div>
     </div>
@@ -19,7 +19,7 @@
             <p class="conditions">{{currentWeather?.WeatherText}}</p>
         </div>
     </div>
-    <app-side-buttons></app-side-buttons>
+    <app-side-buttons [weatherKey]="currentWeather?.Key"></app-side-buttons>
 </div>
 
 <app-daily-forecast [forecast]="currentWeather?.DailyForecasts"></app-daily-forecast>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { WeatherService } from 'src/app/services/weather.service';
+import { ApiService } from 'src/app/services/api.service';
 import { SettingService } from 'src/app/services/settings.service';
 import { WeatherStoreService } from 'src/app/services/weather-store.service';
 import { Subscription } from 'rxjs';
@@ -23,10 +23,10 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   public faTimes = faTimes;
-  public resultSearch: Autocomplete[];
+  public resultSearch: Autocomplete[] = [];
 
   constructor(
-    private weatherService: WeatherService,
+    private apiService: ApiService,
     public settingService: SettingService,
     private weatherStoreService: WeatherStoreService
   ) { }
@@ -34,7 +34,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentWeatherSubscription = this.weatherStoreService.currentWeather$.subscribe(res => {
       this.currentWeather = res;
-      console.log(res);
     });
 
     this.isCelsiusSubscription = this.settingService.unitCelsiuState.subscribe(res => {
@@ -49,7 +48,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   search(): void {
     if (this.searchInput.nativeElement.value.length >= 3) {
-      this.weatherService.autocomplete(this.searchInput.nativeElement.value).subscribe(res => {
+      this.apiService.autocomplete(this.searchInput.nativeElement.value).subscribe(res => {
         this.resultSearch = res;
       });
     }
@@ -60,9 +59,9 @@ export class WeatherComponent implements OnInit, OnDestroy {
     this.searchInput.nativeElement.value = '';
   }
 
-  selectCurrentWeather(key: string, LocalizedName: string, Country: string) {
+  selectSearch(key: string, LocalizedName: string, Country: string) {
     this.clearSearch();
-    this.weatherStoreService.fetchByKey(key, LocalizedName, Country);
+    this.weatherStoreService.fetch(key, LocalizedName, Country);
   }
 
 }

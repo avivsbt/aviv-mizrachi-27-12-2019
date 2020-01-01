@@ -29,6 +29,7 @@ export class IconComponent implements OnInit {
             case 35:
                 return 'clear';
             case 5:
+            case 36:
                 return 'mostlysunny';
             case 6:
             case 20:
@@ -60,6 +61,8 @@ export class IconComponent implements OnInit {
             case 29:
             case 31:
                 return 'chancesnow';
+            default:
+                return 'clear';
         }
     }
 

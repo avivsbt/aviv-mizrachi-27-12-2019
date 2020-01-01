@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import { SettingService } from 'src/app/services/settings.service';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,8 @@ export class SideButtonsComponent implements OnInit, OnDestroy {
   public faLocationArrow = faLocationArrow;
   private isCelsiusSubscription: Subscription;
   public isCelsius: boolean;
+
+  @Input() weatherKey: string;
 
   constructor(
     public settingService: SettingService

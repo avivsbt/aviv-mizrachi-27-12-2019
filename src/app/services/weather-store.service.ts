@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WeatherService } from './weather.service';
+import { ApiService } from './api.service';
 import { BehaviorSubject } from 'rxjs';
 import { Location } from '../models/location.model';
 import { Weather } from '../models/weather.model';
@@ -10,13 +10,11 @@ import { map } from 'rxjs/operators'
 export class WeatherStoreService {
 
     private currentWeatherKey: string;
-    private weatherKeys: string[];
+    private weatherKeys: string[] = [];
 
     constructor(
-        private weatherService: WeatherService
-    ) {
-
-    }
+        private apiService: ApiService
+    ) {}
 
     private readonly _weathers = new BehaviorSubject<Weather[]>([]);
     readonly weathers$ = this._weathers.asObservable();
@@ -34,31 +32,30 @@ export class WeatherStoreService {
     }
 
     async fetchByLocation(location: Location) {
-        const geoposition = await this.weatherService.geoposition(location.latitude, location.longitude).toPromise();
-        this.fetchByKey(geoposition.Key, geoposition.LocalizedName, geoposition.Country.ID);
+        const geoposition = await this.apiService.geoposition(location.latitude, location.longitude).toPromise();
+        this.fetch(geoposition.Key, geoposition.LocalizedName, geoposition.Country.ID);
     }
 
-    async fetchByKey(key: string, LocalizedName: string, Country: string) {
-       //!this.weatherKeys.includes(key)) 
-       //this.weatherKeys = [...this.weatherKeys, key];
-        const currentConditions = await this.weatherService.currentConditions(key).toPromise();
-        const forecasts = await this.weatherService.forecasts(key).toPromise();
-        const current = new Weather(
-            key,
-            LocalizedName,
-            Country,
-            currentConditions[0].LocalObservationDateTime,
-            currentConditions[0].Temperature,
-            currentConditions[0].WeatherIcon,
-            currentConditions[0].WeatherText,
-            forecasts.DailyForecasts
-        );
+    async fetch(key: string, LocalizedName: string, Country: string) {
         this.currentWeatherKey = key;
-        this.weathers = [...this.weathers, current];
+        if (!this.weatherKeys.includes(key)) {
+            const currentConditions = await this.apiService.currentConditions(key).toPromise();
+            const forecasts = await this.apiService.forecasts(key).toPromise();
+            const current = new Weather(
+                key,
+                LocalizedName,
+                Country,
+                currentConditions[0].LocalObservationDateTime,
+                currentConditions[0].Temperature,
+                currentConditions[0].WeatherIcon,
+                currentConditions[0].WeatherText,
+                forecasts.DailyForecasts
+            );
+            this.weatherKeys = [...this.weatherKeys, key];
+            this.weathers = [...this.weathers, current];
+        }
+        else{
+            this.weathers = [...this.weathers];
+        }
     }
-
-    selectCurrentWeather() {
-
-    }
-
 }

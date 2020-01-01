@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { SettingService } from '../../services/settings.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { StorageService } from 'src/app/services/local-storage.service';
+import { FavoriteStoreService } from 'src/app/services/favorites-store.service';
+import { Subscription } from 'rxjs';
+import { Favorite } from 'src/app/models/favorite.model';
 
 @Component({
   selector: 'app-favorites',
@@ -7,14 +10,28 @@ import { SettingService } from '../../services/settings.service';
   styleUrls: ['./favorites.component.css']
 })
 
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent implements OnInit, OnDestroy {
+
+  private favoriteStorage: any[] = this.storageService.get<any>('favorite');
+
+  private favoriteSubscription: Subscription;
+  public favorites: Favorite[];
 
   constructor(
-    public settingService: SettingService
-  ) { }
+    private storageService: StorageService,
+    private favoritesService: FavoriteStoreService
+  ) {
+    this.favoritesService.fetchByKey(this.favoriteStorage);
+  }
 
   ngOnInit(): void {
+    this.favoriteSubscription = this.favoritesService.currentsFavorites$.subscribe(res => {
+      this.favorites = res;
+    });
+  }
 
+  ngOnDestroy(): void {
+    this.favoriteSubscription.unsubscribe();
   }
 
 }

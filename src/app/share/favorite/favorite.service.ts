@@ -3,40 +3,41 @@ import { StorageService } from 'src/app/services/local-storage.service';
 import * as Moment from 'moment';
 import { Subject } from 'rxjs';
 
-
 @Injectable({ providedIn: 'root' })
 
 export class FavoriteService {
 
     private favorite: any;
+    private readonly favoriteSubject = new Subject<any>();
+    readonly favoriteState = this.favoriteSubject.asObservable();
 
     constructor(
         private storageService: StorageService
     ) { }
 
     addFavorite(id: string, type: string) {
-        
-        
-        if (!this.favorite) {
-            this.storageService.set(type, [id], Moment().add(30, 'day').toDate());
-            console.log('fetch Favorite')
-            this.fetchFavorite(type);
+        if (!this.favorite.includes(id)) {
+            this.favorite = [...this.favorite, id];
+            this.storageService.set(type, this.favorite, Moment().add(30, 'day').toDate());
+            this.favoriteSubject.next(this.favorite);
         }
-        else{
-            this.storageService.set(type, [...this.favorite ,id], Moment().add(30, 'day').toDate());
-        }
-
-        //this.storageService.set(type, [...this.favorite ,id], Moment().add(30, 'day').toDate());
-
-        console.log(this.favorite)
-
     }
 
     removeFavorite(id: string, type: string) {
-
+        if (this.favorite.includes(id)) {
+            this.favorite = this.favorite.filter(favoriteId => favoriteId !== id);
+            this.storageService.set(type, this.favorite, Moment().add(30, 'day').toDate());
+            this.favoriteSubject.next(this.favorite);
+        }
     }
 
-    fetchFavorite(type) {
+    setFavorite(type) {
+        if (!this.storageService.get<any>(type)) {
+            this.storageService.set(type, [], Moment().add(30, 'days').toDate());
+        }
         this.favorite = this.storageService.get<any>(type);
+        setTimeout(() => {
+            this.favoriteSubject.next(this.favorite);
+        }, 0);
     }
 }
