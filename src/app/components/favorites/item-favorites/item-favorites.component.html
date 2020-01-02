@@ -1,20 +1,23 @@
 <div class="row item-favorites">
-    <div class="col">
+    <div class="col pointer col-3" [routerLink]="['/']" (click)="select(favorite?.Key,favorite?.Name,favorite?.Country)">
         <div class="item-center">
             <div>
-                <p class="location">{{favorite?.Name}} <span class="temp">72</span></p>
+                <p class="location">
+                    {{favorite?.Name}}
+                    <app-temperature class="temp" [temperature]="favorite?.Temperature"></app-temperature>
+                </p>
                 <p class="conditions">{{favorite?.WeatherText}}</p>
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col pointer col-3" [routerLink]="['/']" (click)="select(favorite?.Key,favorite?.Name,favorite?.Country)">
         <div class="item-center">
             <div>
                 <app-icon [small]='true' [type]='favorite?.WeatherIcon'></app-icon>
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col col-3">
         <div class="item-center">
             <div>
                 <favorite [id]='favorite?.Key' [type]="'favorite'"></favorite>

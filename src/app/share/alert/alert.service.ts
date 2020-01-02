@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Alert, AlertType } from './alert.model';
 
 @Injectable({ providedIn: 'root' })
+
 export class AlertService {
     
     private subject = new Subject<Alert>();
@@ -13,7 +14,6 @@ export class AlertService {
     constructor(
         private router: Router
     ) {
-
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 if (this.keepAfterRouteChange) {

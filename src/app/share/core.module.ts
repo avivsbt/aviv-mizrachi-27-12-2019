@@ -5,6 +5,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { IconComponent } from './icon/icon.component';
 import { AlertComponent } from './alert/alert.component';
+import { TemperatureComponent } from './temperature/temperature.component';
 
 @NgModule({
     imports: [
@@ -16,17 +17,20 @@ import { AlertComponent } from './alert/alert.component';
         SpinnerComponent,
         FavoriteComponent,
         IconComponent,
+        TemperatureComponent,
         AlertComponent
     ],
     declarations: [
         SpinnerComponent,
         FavoriteComponent,
         IconComponent,
+        TemperatureComponent,
         AlertComponent
     ],
     providers: [],
     entryComponents: []
 })
+
 export class CoreModule {
     static forRoot() {
         return {

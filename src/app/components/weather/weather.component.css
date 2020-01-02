@@ -6,6 +6,7 @@
 .container-center .conditions {
     font-size: 35px;
     margin: 0;
+    display: block;
 }
 .cover-search {
     width: 50%;

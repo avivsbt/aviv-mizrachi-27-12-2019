@@ -1,5 +1,5 @@
 <div class="cover-search">
-    <input type="text" placeholder="Search" (keyup)="search()" #searchInput>
+    <input type="text" placeholder="Search" (keydown)="search()" #searchInput>
     <fa-icon class="fa faTimes pointer" [icon]="faTimes" (click)="clearSearch()"></fa-icon>
     <div class="result-search pointer">
         <div *ngFor="let item of resultSearch" (click)="selectSearch(item.Key, item.LocalizedName, item.Country.ID)">
@@ -14,8 +14,7 @@
             <h1 class="location">{{currentWeather?.Name}}</h1>
             <h2 class="date">{{currentWeather?.DateTime | date}}</h2>
             <app-icon [type]='currentWeather?.WeatherIcon'></app-icon>
-            <p class="temp" [hidden]="isCelsius">{{currentWeather?.Temperature.Metric.Value}}</p>
-            <p class="temp" [hidden]="!isCelsius">{{currentWeather?.Temperature.Imperial.Value}}</p>
+            <app-temperature class="temp" [temperature]="currentWeather?.Temperature"></app-temperature>
             <p class="conditions">{{currentWeather?.WeatherText}}</p>
         </div>
     </div>

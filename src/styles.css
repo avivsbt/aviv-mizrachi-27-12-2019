@@ -60,12 +60,15 @@ input {
 .pointer{
 	cursor: pointer;
 }
-.temp::after {
+.temp span::after {
     content: '\00b0';
     padding: 1px;
 }
 app-weather{
 	display: contents;
+}
+.col-3{
+    width: 33%;
 }
 @media only screen and (max-width : 768px ), screen and (max-height: 768px)  { 
     h1,
