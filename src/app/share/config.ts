@@ -20,7 +20,12 @@ export const CONFIG = {
         forecasts: '/forecasts/v1/daily/5day/',     
     },
     APIKey:{
-        Weather:   'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4' //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' //'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' //'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6'   
+        Weather:   
+        'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4' 
+        //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' 
+        //'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
+        //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' 
+        //'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6'   
     },
     defaultLocation: new Location(32.106086399999995, 34.829107199999996),
 };

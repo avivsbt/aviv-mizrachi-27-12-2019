@@ -1,13 +1,5 @@
-<div class="cover-search">
-    <input type="text" placeholder="Search" (keydown)="search()" #searchInput>
-    <fa-icon class="fa faTimes pointer" [icon]="faTimes" (click)="clearSearch()"></fa-icon>
-    <div class="result-search pointer">
-        <div *ngFor="let item of resultSearch" (click)="selectSearch(item.Key, item.LocalizedName, item.Country.ID)">
-            {{item.LocalizedName}}
-        </div>
-    </div>
-</div>
 
+<app-search></app-search>
 <div class="container-center">
     <div class="item-center">
         <div>

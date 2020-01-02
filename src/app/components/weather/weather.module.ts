@@ -6,6 +6,7 @@ import { CoreModule } from '../../share/core.module';
 import { WeatherComponent } from './weather.component';
 import { DailyForecastComponent } from './daily-forecast/daily-forecast.component';
 import { SideButtonsComponent } from './side-buttons/side-buttons.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -17,12 +18,14 @@ import { SideButtonsComponent } from './side-buttons/side-buttons.component';
   exports: [
     WeatherComponent,
     DailyForecastComponent, 
-    SideButtonsComponent
+    SideButtonsComponent,
+    SearchComponent
   ],
   declarations: [
     WeatherComponent,
     DailyForecastComponent, 
-    SideButtonsComponent
+    SideButtonsComponent,
+    SearchComponent
   ],
   providers: [],
 })
