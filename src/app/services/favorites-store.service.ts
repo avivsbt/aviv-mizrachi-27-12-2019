@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class FavoriteStoreService {
 
     private favoriteStoreKeys: string[] = [];
-    private currentKeys: any = [];
+    private currentKeys: string[] = [];
 
     constructor(
         private apiService: ApiService,
@@ -30,7 +30,7 @@ export class FavoriteStoreService {
         this._favorites.next(val);
     }
 
-    fetchByKey(keys: string[]) {
+    fetchByKeys(keys: string[]) {
         this.currentKeys = keys;
         const keysNotExists = keys.filter(key => !this.favoriteStoreKeys.includes(key));
         keysNotExists.forEach(key => this.fetch(key));

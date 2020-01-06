@@ -12,7 +12,7 @@ import { Favorite } from 'src/app/models/favorite.model';
 
 export class FavoritesComponent implements OnInit, OnDestroy {
 
-  private favoriteStorage: any[] = this.storageService.get<any>('favorite');
+  private favoriteStorage: string[] = this.storageService.get<string[]>('favorite');
 
   private favoriteSubscription: Subscription;
   public favorites: Favorite[];
@@ -21,7 +21,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     private storageService: StorageService,
     private favoritesService: FavoriteStoreService
   ) {
-    this.favoritesService.fetchByKey(this.favoriteStorage);
+    this.favoritesService.fetchByKeys(this.favoriteStorage);
   }
 
   ngOnInit(): void {

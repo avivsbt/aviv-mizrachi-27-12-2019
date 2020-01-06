@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './share/core.module';
+import { CoreModule } from './share/share.module';
 import { WeatherModule } from './components/weather/weather.module';
 import { HeaderComponent } from './share/header/header.component';
 import { LocalStorageModule } from 'angular-2-local-storage';
