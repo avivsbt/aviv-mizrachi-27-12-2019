@@ -1,7 +1,8 @@
 <div class="cover-buttons item-center">
     <div>
         <favorite [id]='weatherKey' [type]="'favorite'"></favorite>
-        <button class="unit" (click)="toggleUnit()" [ngClass]="{'active': isCelsius}">F</button>
+        <button class="unit" (click)="toggleUnit()" [innerHtml]="isCelsius ? 'F' : 'C'"></button>
+        
         <button (click)="toggleLocation()"><fa-icon class="fa" [icon]="faLocationArrow"></fa-icon></button>
     </div>
 </div>
