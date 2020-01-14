@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FavoriteService } from './favorite.service';
 import { Subscription } from 'rxjs';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'favorite',
@@ -21,7 +22,8 @@ export class FavoriteComponent implements OnInit, OnDestroy {
   public favorite: any[];
 
   constructor(
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -36,11 +38,19 @@ export class FavoriteComponent implements OnInit, OnDestroy {
   }
 
   add(): void {
+    this.alertService.info('Item added to Favorites list');
     this.favoriteService.addFavorite(this.id, this.type);
+    setTimeout(() => {
+      this.alertService.clear();
+    }, 2000);    
   }
 
   remove(): void {
+    this.alertService.info('Item removed to favorites list');
     this.favoriteService.removeFavorite(this.id, this.type)
+    setTimeout(() => {
+      this.alertService.clear();
+    }, 2000);
   }
 
   active(): boolean {

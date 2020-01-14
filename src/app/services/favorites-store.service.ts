@@ -20,7 +20,7 @@ export class FavoriteStoreService {
 
     readonly currentsFavorites$ = this.favorites$.pipe(
         map(favorites => favorites.filter(f => this.currentKeys.includes(f.Key)))
-    )  
+    )
 
     get favorites(): Favorite[] {
         return this._favorites.getValue();
@@ -28,6 +28,11 @@ export class FavoriteStoreService {
 
     set favorites(val: Favorite[]) {
         this._favorites.next(val);
+    }
+
+    remove(key: string): void {
+        this.favoriteStoreKeys = this.favoriteStoreKeys.filter(k => k != key);
+        this.favorites = [...this.favorites.filter(f => f.Key != key)];
     }
 
     fetchByKeys(keys: string[]) {
@@ -48,6 +53,6 @@ export class FavoriteStoreService {
             currentConditions[0].WeatherText,
         );
         this.favorites = [...this.favorites, current];
-        this.favoriteStoreKeys = [...this.favoriteStoreKeys, key]
+        this.favoriteStoreKeys = [...this.favoriteStoreKeys, key];
     }
 }
