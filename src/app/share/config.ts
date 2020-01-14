@@ -21,7 +21,7 @@ export const CONFIG = {
     },
     APIKey:{
         Weather:   
-        'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4' 
+        'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4'  
         //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' 
         //'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
         //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' 
