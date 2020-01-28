@@ -53,9 +53,9 @@ export class FavoriteComponent implements OnInit, OnDestroy {
     }, 2000);
   }
 
-  active(): boolean {
+  checkIfExists(id): boolean {
     if (this.favorite) {
-      return this.favorite.includes(this.id);
+      return this.favorite.includes(id);
     }
   }
 
