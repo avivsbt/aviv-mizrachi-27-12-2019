@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { WeatherStoreService } from 'src/app/services/weather-store.service';
 import { Autocomplete } from '../../../models/autocomplete.model';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { debounceTime, map, distinctUntilChanged, filter } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +12,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./search.component.css']
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit {
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   public faTimes = faTimes;
@@ -23,20 +25,32 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+  }
 
+  ngAfterViewInit(): void {
+    this.search();
   }
 
   search(): void {
-    if(this.searchInput.nativeElement.value.length >= 0){
-      this.onSearch = true;
-      this.resultSearch = [];
-    }
-    if (this.searchInput.nativeElement.value.length >= 2) {
-      this.apiService.autocomplete(this.searchInput.nativeElement.value).subscribe(res => {
+    let regex = new RegExp(/^[a-zA-Z\s]*$/);
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => {
+        if (event.target.value.length <= 2) {
+          this.onSearch = true;
+          this.resultSearch = [];
+        }
+        return event.target.value;
+      })
+      , filter(res => res.length > 2 && regex.test(res))
+      , debounceTime(1000)
+      , distinctUntilChanged()
+    ).subscribe((text: string) => {
+      this.apiService.autocomplete(text).subscribe((res) => {
         this.onSearch = false;
         this.resultSearch = res;
       });
-    }
+    });
   }
 
   clearSearch(): void {
